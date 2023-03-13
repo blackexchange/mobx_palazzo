@@ -4,8 +4,6 @@ import './page_section.dart';
 import 'custom_header.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ClipRRect(

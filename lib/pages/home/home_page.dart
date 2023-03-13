@@ -7,9 +7,11 @@ import '../components/components.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: CustomDrawer(),
-      appBar: AppBar(),
+    return SafeArea(
+      child: Scaffold(
+        drawer: CustomDrawer(),
+        appBar: AppBar(),
+      ),
     );
   }
 }
