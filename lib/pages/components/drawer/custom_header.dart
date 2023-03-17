@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
+import '../../../stores/stores.dart';
 import '../../pages.dart';
 
 class CustomHeader extends StatelessWidget {
-  const CustomHeader({super.key});
+  final AuthStore auth = GetIt.I<AuthStore>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pop();
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => LoginPage()));
+        if (auth.isAuth) {
+          GetIt.I<PageStore>().setPage(0);
+        } else {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => LoginPage()));
+        }
       },
       child: Container(
         color: Theme.of(context).primaryColor,
@@ -30,7 +36,22 @@ class CustomHeader extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text('Olá'), Text('Acesse')],
+              children: [
+                Text(
+                  auth.isAuth ? auth.userAuth!.nome : 'Acesse sua conta agora!',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  auth.isAuth ? auth.userAuth!.nome : 'Clique aqui!',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
           )
         ]),

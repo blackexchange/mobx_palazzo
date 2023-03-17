@@ -9,13 +9,49 @@ class UserRepo {
 
     parseObj.set<String>('nome', user.nome);
     parseObj.set<String>('telefone', user.telefone);
-    parseObj.set('tipo', user.tipo.index);
+    parseObj.set('tipo', user.tipo?.index);
 
     final response = await parseObj.signUp();
 
     if (response.success) {
+      ParseUser pUser = response.result;
+      final User userParsed = User.fromJson(pUser.objectId!, pUser.toJson());
+
+      return userParsed;
     } else {
       return Future.error(ParseErrors.getDescription(response.error!.code));
+    }
+  }
+
+  Future<User> signIn(String email, String senha) async {
+    final parseObj = ParseUser(email, senha, null);
+
+    final response = await parseObj.login();
+
+    if (response.success) {
+      ParseUser pUser = response.result;
+      final User userParsed = User.fromJson(pUser.objectId!, pUser.toJson());
+
+      return userParsed;
+    } else {
+      return Future.error(ParseErrors.getDescription(response.error!.code));
+    }
+  }
+
+  Future<User?> currentUser() async {
+    final parseObj = await ParseUser.currentUser() as ParseUser?;
+    if (parseObj == null) {
+      return null;
+    }
+
+    final ParseResponse? response =
+        await ParseUser.getCurrentUserFromServer(parseObj.sessionToken!);
+
+    if (response?.success == null || !response!.success) {
+      await parseObj.logout();
+      return null;
+    } else {
+      return User.fromJson(response.result.objectId!, response.result.toJson());
     }
   }
 }

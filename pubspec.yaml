@@ -41,6 +41,8 @@ dependencies:
   parse_server_sdk: ^4.0.0
   get_it: ^7.2.0
   brasil_fields: ^1.10.0
+  image_picker: ^0.8.7
+  image_cropper: ^3.0.1
 
 
 dev_dependencies:

@@ -1,20 +1,22 @@
 enum UserType { ADMIN, MORADOR, PROPRIETARIO, FUNCIONARIO, SUPER, ADMUNIDADE }
 
 class User {
-  late final String id;
+  final String? id;
   late final String nome;
   late final String email;
   late final String telefone;
   final String? senha;
-  final UserType tipo;
+  final UserType? tipo;
+  final String? createdAt;
 
   User(
-      {required this.id,
+      {this.id,
       required this.nome,
       required this.email,
       required this.telefone,
       this.senha,
-      this.tipo = UserType.MORADOR});
+      this.tipo = UserType.MORADOR,
+      this.createdAt});
 
   factory User.fromJson(String key, Map json) {
     /* if (!json.keys.toSet().containsAll(['profile'])) {
@@ -26,14 +28,16 @@ class User {
         nome: json['nome'],
         email: json['email'],
         telefone: json['telefone'],
-        tipo: json['tipo']);
+        tipo: UserType.values[json['tipo']],
+        createdAt: json['createdAt']);
   }
 
-  Map toJson() => {
+  Map<String, dynamic> toJson() => {
         'id': id,
         'nome': nome,
         'email': email,
         'telefone': telefone,
-        'tipo': tipo
+        'tipo': tipo?.index,
+        'createdAt': createdAt
       };
 }

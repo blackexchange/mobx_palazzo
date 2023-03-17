@@ -1,9 +1,14 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx_palazzo/pages/components/components.dart';
+import '../../stores/stores.dart';
 
 import '../signup/signup.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  SignInStore signInStore = SignInStore();
 
   @override
   Widget build(BuildContext context) {
@@ -26,27 +31,45 @@ class LoginPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   //mainAxisAlignment: MainAxisAlignment.,
                   children: [
+                    Observer(
+                      builder: (_) {
+                        return ErrorBox(signInStore.error);
+                      },
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
                     Text('Acessar com e-mail'),
                     SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                          isDense: true,
-                          label: Text('Email'),
-                          border: OutlineInputBorder()),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
+                    Observer(builder: (_) {
+                      return TextField(
+                        decoration: InputDecoration(
+                            enabled: !signInStore.isLoading,
+                            isDense: true,
+                            label: Text('Email'),
+                            border: OutlineInputBorder(),
+                            errorText: signInStore.emailError),
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: signInStore.setEmail,
+                      );
+                    }),
                     SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                          isDense: true,
-                          label: Text('Senha'),
-                          border: OutlineInputBorder()),
-                      obscureText: true,
-                    ),
+                    Observer(builder: (_) {
+                      return TextField(
+                        decoration: InputDecoration(
+                            enabled: !signInStore.isLoading,
+                            isDense: true,
+                            label: Text('Senha'),
+                            border: OutlineInputBorder(),
+                            errorText: signInStore.senhaError),
+                        obscureText: true,
+                        onChanged: signInStore.setSenha,
+                      );
+                    }),
                     Container(
                       alignment: Alignment.centerRight,
                       width: double.infinity,
@@ -57,7 +80,11 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ElevatedButton(onPressed: () {}, child: Text('ENTRAR')),
+                    Observer(builder: (_) {
+                      return ElevatedButton(
+                          onPressed: signInStore.signInPressed,
+                          child: Text('ENTRAR'));
+                    }),
                     Divider(
                       color: Theme.of(context).primaryColorLight,
                     ),

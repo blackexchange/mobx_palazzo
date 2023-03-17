@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobx_palazzo/stores/stores.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:get_it/get_it.dart';
 
@@ -15,6 +16,7 @@ void main() async {
 
 void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
+  GetIt.I.registerSingleton(AuthStore());
 }
 
 Future<void> initializeParse() async {

@@ -1,7 +1,9 @@
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx_palazzo/models/user.dart';
 import '../helpers/helpers.dart';
 import '../repositories/repositories.dart';
+import 'auth_store.dart';
 
 part 'signup_store.g.dart';
 
@@ -10,6 +12,8 @@ class SignUpStore = _SignUpStore with _$SignUpStore;
 abstract class _SignUpStore with Store {
   @observable
   String? name;
+
+  @observable
   String? error;
 
   @action
@@ -125,7 +129,8 @@ abstract class _SignUpStore with Store {
         User(nome: name!, email: email!, telefone: telefone!, senha: senha!);
 
     try {
-      UserRepo().signUp(user);
+      final userRet = await UserRepo().signUp(user);
+      GetIt.I<AuthStore>().setUser(userRet);
     } catch (e) {
       error = e.toString();
     }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_palazzo/pages/components/components.dart';
-import '../../stores/signup_store.dart';
+import '../../stores/stores.dart';
 import '../../pages/login/login.dart';
 
 class SignUpPage extends StatelessWidget {

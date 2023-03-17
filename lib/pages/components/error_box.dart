@@ -10,9 +10,10 @@ class ErrorBox extends StatelessWidget {
     if (message == null) return Container();
     return Container(
       padding: EdgeInsets.all(8),
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8))),
-      color: Colors.redAccent,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+        color: Colors.redAccent,
+      ),
       child: Row(
         children: [
           Icon(

@@ -59,6 +59,21 @@ mixin _$SignUpStore on _SignUpStore, Store {
     });
   }
 
+  late final _$errorAtom = Atom(name: '_SignUpStore.error', context: context);
+
+  @override
+  String? get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(String? value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
   late final _$emailAtom = Atom(name: '_SignUpStore.email', context: context);
 
   @override
@@ -207,6 +222,7 @@ mixin _$SignUpStore on _SignUpStore, Store {
   String toString() {
     return '''
 name: ${name},
+error: ${error},
 email: ${email},
 senha: ${senha},
 confirmaSenha: ${confirmaSenha},

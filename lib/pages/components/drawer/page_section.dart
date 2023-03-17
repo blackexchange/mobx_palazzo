@@ -13,19 +13,26 @@ class PageSection extends StatelessWidget {
     return Column(
       children: [
         PageTile(
-            label: 'Reservas',
-            iconData: Icons.cake,
+            label: 'Meus Dados',
+            iconData: Icons.person,
             onTap: () {
               pageStore.setPage(0);
             },
             highlighted: pageStore.page == 0),
         PageTile(
-            label: 'Ocorrências',
-            iconData: Icons.book,
+            label: 'Reservas',
+            iconData: Icons.cake,
             onTap: () {
               pageStore.setPage(1);
             },
             highlighted: pageStore.page == 1),
+        PageTile(
+            label: 'Ocorrências',
+            iconData: Icons.book,
+            onTap: () {
+              pageStore.setPage(2);
+            },
+            highlighted: pageStore.page == 2),
       ],
     );
   }
