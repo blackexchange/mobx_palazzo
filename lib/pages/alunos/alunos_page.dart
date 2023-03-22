@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import '../../pages/pages.dart';
 import '../../stores/aluno_store.dart';
+import './components/components.dart';
 
 class AlunosPage extends StatelessWidget {
   final AlunoStore alunoStore = AlunoStore();

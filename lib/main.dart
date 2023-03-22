@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobx_palazzo/stores/stores.dart';
+import 'package:mobx_palazzo/pages/turma/turma_page_list.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:get_it/get_it.dart';
+import 'package:path_provider/path_provider.dart';
 
-import '../../stores/page_store.dart';
+import '../stores/stores.dart';
 
 import 'pages/pages.dart';
 
@@ -17,14 +18,20 @@ void main() async {
 void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
   GetIt.I.registerSingleton(AuthStore());
+  GetIt.I.registerSingleton(TurmaStore());
+  GetIt.I.registerSingleton(AlunoStore());
 }
 
 Future<void> initializeParse() async {
+  final appDocDir = await getApplicationDocumentsDirectory();
+
   await Parse().initialize('Z6fBwWS3AS2fdLk5G3emalO6FvRvh0fJO7WSXvwL',
       'https://parseapi.back4app.com',
       clientKey: 'DK3rwXf4J65uFlh33GI0n29e68nH9o1Rcvlgz5kv',
       autoSendSessionId: true,
-      debug: true);
+      debug: true,
+      coreStore:
+          await CoreStoreSembastImp.getInstance(appDocDir.path + "/data"));
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +41,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Escolar',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.deepOrange,
@@ -44,7 +51,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.amberAccent,
           appBarTheme: AppBarTheme(elevation: 0),
           visualDensity: VisualDensity.adaptivePlatformDensity),
-      home: BasePage(),
+      home: HomePage(),
     );
   }
 }

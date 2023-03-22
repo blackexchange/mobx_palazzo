@@ -2,10 +2,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:mobx_palazzo/stores/stores.dart';
 
-import './image_source_modal.dart';
+import '../../../stores/stores.dart';
+import 'components.dart';
 
 class ImagesField extends StatelessWidget {
   final AlunoStore alunoStore;
@@ -63,7 +62,14 @@ class ImagesField extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(8, 8, 0, 8),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) => ImageDialog(
+                              image: alunoStore.images[index],
+                              onDelete: () =>
+                                  alunoStore.images.removeAt(index)));
+                    },
                     child: CircleAvatar(
                       backgroundColor: Colors.grey[300],
                       radius: 44,
