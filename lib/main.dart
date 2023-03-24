@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobx_palazzo/pages/turma/turma_page_list.dart';
 import 'package:parse_server_sdk/parse_server_sdk.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../stores/stores.dart';
-
 import 'pages/pages.dart';
 
 void main() async {
@@ -19,7 +17,7 @@ void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
   GetIt.I.registerSingleton(AuthStore());
   GetIt.I.registerSingleton(TurmaStore());
-  GetIt.I.registerSingleton(AlunoStore());
+  GetIt.I.registerSingleton(MatriculaStore());
 }
 
 Future<void> initializeParse() async {
@@ -51,7 +49,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.amberAccent,
           appBarTheme: AppBarTheme(elevation: 0),
           visualDensity: VisualDensity.adaptivePlatformDensity),
-      home: HomePage(),
+      home: BasePage(),
     );
   }
 }

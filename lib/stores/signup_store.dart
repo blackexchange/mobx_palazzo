@@ -126,7 +126,7 @@ abstract class _SignUpStore with Store {
     isLoading = true;
 
     final user =
-        User(nome: name!, email: email!, telefone: telefone!, senha: senha!);
+        User(name: name!, email: email!, phone: telefone!, senha: senha!);
 
     try {
       final userRet = await UserRepo().signUp(user);

@@ -13,15 +13,15 @@ class PageSection extends StatelessWidget {
     return Column(
       children: [
         PageTile(
-            label: 'Meus Dados',
-            iconData: Icons.person,
+            label: 'Home',
+            iconData: Icons.home,
             onTap: () {
               pageStore.setPage(0);
             },
             highlighted: pageStore.page == 0),
         PageTile(
-            label: 'Reservas',
-            iconData: Icons.cake,
+            label: 'Matrículas',
+            iconData: Icons.child_care,
             onTap: () {
               pageStore.setPage(1);
             },

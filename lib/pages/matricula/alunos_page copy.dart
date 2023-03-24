@@ -1,11 +1,8 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
-import '../../pages/pages.dart';
-import '../../stores/aluno_store.dart';
-import './components/components.dart';
+import '../pages.dart';
 
 class AlunosPage extends StatelessWidget {
-  final AlunoStore alunoStore = AlunoStore();
   @override
   Widget build(BuildContext context) {
     const labelStyle = TextStyle(
@@ -20,7 +17,6 @@ class AlunosPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Card(
-        clipBehavior: Clip.antiAlias,
         margin: const EdgeInsets.symmetric(horizontal: 16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -29,7 +25,6 @@ class AlunosPage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ImagesField(alunoStore),
             TextFormField(
               decoration: InputDecoration(
                   prefix: Icon(

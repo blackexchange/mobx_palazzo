@@ -7,9 +7,9 @@ class UserRepo {
   Future<User> signUp(User user) async {
     final parseObj = ParseUser(user.email, user.senha, user.email);
 
-    parseObj.set<String>('nome', user.nome);
-    parseObj.set<String>('telefone', user.telefone);
-    parseObj.set('tipo', user.tipo?.index);
+    parseObj.set<String>('name', user.name);
+    parseObj.set<String>('phone', user.phone);
+    parseObj.set('type', user.type?.index);
 
     final response = await parseObj.signUp();
 
