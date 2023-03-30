@@ -29,11 +29,10 @@ class _BasePageState extends State<BasePage> {
         children: [
           HomePage(),
           MatriculaPage(),
+          UserPage(),
+          FilaPage(),
           Container(),
-          Container(),
-          Container(),
-          Container(),
-          Container(),
+          AccountPage(),
         ],
       ),
     );

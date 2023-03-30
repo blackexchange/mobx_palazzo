@@ -38,14 +38,16 @@ class CustomHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  auth.isAuth ? auth.userAuth!.name : 'Acesse sua conta agora!',
+                  auth.isAuth
+                      ? auth.userAuth!.name!
+                      : 'Acesse sua conta agora!',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  auth.isAuth ? auth.userAuth!.name : 'Clique aqui!',
+                  auth.isAuth ? auth.userAuth!.name! : 'Clique aqui!',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,

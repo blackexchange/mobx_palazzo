@@ -45,6 +45,7 @@ abstract class _SignInStore with Store {
   @action
   Future<void> _signIn() async {
     isLoading = true;
+    error = null;
     try {
       final userRet = await UserRepo().signIn(email!, senha!);
       GetIt.I<AuthStore>().setUser(userRet);

@@ -1,6 +1,6 @@
 import './models.dart';
 
-enum Status { PENDENTE, ATIVO, INATIVO }
+enum MatriculaStatus { PENDENTE, ATIVO, INATIVO }
 
 class Matricula {
   String? id;
@@ -8,17 +8,18 @@ class Matricula {
   String? descricao;
   String? phone;
   Address? address;
-  bool especial = false;
-  Status status = Status.PENDENTE;
+  bool especial;
+  MatriculaStatus status;
   Turma? turma;
   User? user;
   String? email;
   String? createdAt;
   int? buscas;
+  List<User>? responsaveis;
 
   Matricula(
       {this.id,
-      required this.especial,
+      this.especial = false,
       required this.nome,
       this.descricao,
       required this.turma,
@@ -27,13 +28,14 @@ class Matricula {
       this.email,
       required this.address,
       required this.user,
-      required status,
-      this.buscas});
+      this.status = MatriculaStatus.PENDENTE,
+      this.buscas,
+      this.responsaveis});
 
-  factory Matricula.fromJson(String key, Map json) {
-    /* if (!json.keys.toSet().containsAll(['profile'])) {
-      throw Exception();
-    }*/
+  factory Matricula.fromJson(String key, Map json, {dynamic e}) {
+    if (!json.keys.toSet().containsAll(['especial'])) {
+      throw Exception('Matrícula inválida');
+    }
 
     return Matricula(
         id: key,
@@ -48,9 +50,12 @@ class Matricula {
             bairro: json['bairro'],
             cep: json['cep']),
         createdAt: json['createdAt'],
-        turma: Turma.fromJson('objectId', json['turma']),
-        user: User.fromJson('ObjectId', json['owner']),
-        status: Status.values[json['status']]);
+        turma: Turma.fromJson(
+            json['turma']['objectId'], e.get('turma').toJson(),
+            e: e.get('turma')),
+        user: User.fromJson(json['owner']['objectId'], e.get('owner').toJson()),
+        responsaveis: [],
+        status: MatriculaStatus.values[json['status']]);
   }
 
   Map<String, dynamic> toJson() => {
@@ -61,6 +66,7 @@ class Matricula {
         'phone': phone,
         'email': email,
         'status': status.index,
-        'createdAt': createdAt
+        'createdAt': createdAt,
+        'responsaveis': responsaveis
       };
 }

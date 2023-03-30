@@ -36,7 +36,7 @@ mixin _$AuthStore on _AuthStore, Store {
       ActionController(name: '_AuthStore', context: context);
 
   @override
-  dynamic setUser(User value) {
+  dynamic setUser(User? value) {
     final _$actionInfo =
         _$_AuthStoreActionController.startAction(name: '_AuthStore.setUser');
     try {

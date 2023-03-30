@@ -125,8 +125,12 @@ abstract class _SignUpStore with Store {
   Future<void> _signUp() async {
     isLoading = true;
 
-    final user =
-        User(name: name!, email: email!, phone: telefone!, senha: senha!);
+    final user = User(
+        name: name!,
+        email: email!,
+        phone: telefone!,
+        senha: senha!,
+        type: UserType.ADMIN);
 
     try {
       final userRet = await UserRepo().signUp(user);

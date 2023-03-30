@@ -40,12 +40,21 @@ dependencies:
   flutter_mobx: ^2.0.6+5
   parse_server_sdk: ^4.0.0
   get_it: ^7.2.0
-  brasil_fields: ^1.10.0
+  brasil_fields: ^1.9.0
   image_picker: ^0.8.7
   image_cropper: ^3.0.1
   path_provider: ^2.0.13
   dio: ^5.0.3
   shared_preferences: ^2.0.20
+  geolocator: ^9.0.2
+  google_maps_flutter: ^2.2.5
+  baseflow_plugin_template: ^2.1.1
+  intl: ^0.17.0
+  flutter_localizations:
+    sdk: flutter 
+  toggle_switch: ^2.0.1
+
+
 
 
 dev_dependencies:

@@ -20,7 +20,14 @@ abstract class _TurmaStore with Store {
 
   @computed
   List<Turma> get allTurma => List.from(turmaList)
-    ..insert(0, Turma(id: "*", title: 'Todas', desc: '', active: true));
+    ..insert(
+        0,
+        Turma(
+            id: "*",
+            title: 'Todas',
+            desc: '',
+            active: true,
+            escola: Escola(nome: '')));
 
   @action
   void setError(String value) => error = value;

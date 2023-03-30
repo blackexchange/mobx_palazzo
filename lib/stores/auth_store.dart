@@ -17,7 +17,7 @@ abstract class _AuthStore with Store {
   }
 
   @action
-  setUser(User value) => userAuth = value;
+  setUser(User? value) => userAuth = value;
 
   @computed
   bool get isAuth => userAuth != null;
@@ -27,5 +27,11 @@ abstract class _AuthStore with Store {
     if (user != null) {
       setUser(user);
     }
+  }
+
+  Future<void> logout() async {
+    await UserRepo().logout();
+
+    setUser(null);
   }
 }

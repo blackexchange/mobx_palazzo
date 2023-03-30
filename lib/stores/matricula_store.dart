@@ -156,7 +156,7 @@ abstract class _MatriculaStore with Store {
         especial: hideEspecial,
         turma: turma,
         phone: phone,
-        status: hideEspecial,
+        status: MatriculaStatus.PENDENTE,
         email: email,
         user: GetIt.I<AuthStore>().userAuth);
 

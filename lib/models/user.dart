@@ -1,13 +1,16 @@
+import 'package:mobx_palazzo/models/models.dart';
+
 enum UserType { ADMIN, MORADOR, PROPRIETARIO, FUNCIONARIO, SUPER, ADMUNIDADE }
 
 class User {
-  final String? id;
-  late final String name;
-  late final String email;
-  late final String phone;
-  final String? senha;
-  final UserType? type;
-  final String? createdAt;
+  String? id;
+  String? name;
+  String? email;
+  String? phone;
+  String? senha;
+  UserType type;
+  String? createdAt;
+  List<Matricula>? matriculas;
 
   User(
       {this.id,
@@ -15,21 +18,36 @@ class User {
       required this.email,
       required this.phone,
       this.senha,
-      this.type = UserType.MORADOR,
+      required this.type,
+      this.matriculas,
       this.createdAt});
 
-  factory User.fromJson(String key, Map json) {
-    /* if (!json.keys.toSet().containsAll(['profile'])) {
+  factory User.fromJson(String key, Map json, {dynamic obj}) {
+    if (!json.keys.toSet().containsAll(['name', 'username', 'phone'])) {
       throw Exception();
-    }*/
+    }
+    List<Matricula> listMat = [];
+
+    if (json['matriculas'] != null && obj != null) {
+      final List objList = obj.get('matriculas');
+      objList.forEach((element) {
+        try {
+          listMat.add(Matricula.fromJson(element.objectId, element.toJson(),
+              e: element));
+        } catch (e) {}
+      });
+    }
 
     return User(
-        id: key,
-        name: json['name'],
-        email: json['email'],
-        phone: json['phone'],
-        type: UserType.values[json['type']],
-        createdAt: json['createdAt']);
+      id: key,
+      name: json['name'],
+      email: json['username'],
+      type: UserType.values[json['type']],
+      phone: json['phone'],
+      matriculas: listMat,
+    );
+    // type: UserType.values[json['type']],
+    // createdAt: json['createdAt']);
   }
 
   Map<String, dynamic> toJson() => {

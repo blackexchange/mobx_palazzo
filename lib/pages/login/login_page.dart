@@ -2,13 +2,32 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mobx_palazzo/pages/components/components.dart';
 import '../../stores/stores.dart';
 
 import '../signup/signup.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   SignInStore signInStore = SignInStore();
+
+  final AuthStore authStore = GetIt.I<AuthStore>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    when((_) => authStore.userAuth != null, () {
+      Navigator.of(context).pop(true);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

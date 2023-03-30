@@ -1,6 +1,9 @@
 export './base/base.dart';
-export './home/home.dart';
+export 'home/home.dart';
 export './components/components.dart';
 export './login/login.dart';
 export './matricula/matricula.dart';
 export './turma/turma.dart';
+export './user/user.dart';
+export './fila/fila.dart';
+export 'account/account.dart';
