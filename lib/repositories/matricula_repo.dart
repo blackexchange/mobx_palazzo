@@ -34,10 +34,8 @@ class MatriculaRepo {
 
       final retUser = await _getUserByEmail(m.email!);
       if (retUser != null) {
-        responsavelUser.objectId = "xUC07jCLXr";
-        responsavelUser.username = "";
-        responsavelUser.password = "";
-        responsavelUser.emailAddress = "";
+        responsavelUser.objectId = retUser.objectId;
+
         //  currentUser.objectId = "xUC07jCLXr";
         matriculaObj.set<List<ParseUser>>('responsaveis', [responsavelUser]);
       }

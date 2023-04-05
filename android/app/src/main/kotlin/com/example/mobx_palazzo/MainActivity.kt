@@ -1,4 +1,4 @@
-package com.example.mobx_palazzo
+package com.example.escolaflow
 
 import io.flutter.embedding.android.FlutterActivity
 

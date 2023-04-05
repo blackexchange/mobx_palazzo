@@ -24,6 +24,21 @@ mixin _$PageStore on _PageStore, Store {
     });
   }
 
+  late final _$_userAtom = Atom(name: '_PageStore._user', context: context);
+
+  @override
+  User? get _user {
+    _$_userAtom.reportRead();
+    return super._user;
+  }
+
+  @override
+  set _user(User? value) {
+    _$_userAtom.reportWrite(value, super._user, () {
+      super._user = value;
+    });
+  }
+
   late final _$_PageStoreActionController =
       ActionController(name: '_PageStore', context: context);
 

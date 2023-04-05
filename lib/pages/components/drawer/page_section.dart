@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobx_palazzo/pages/pages.dart';
-import 'package:mobx_palazzo/stores/stores.dart';
+import '../../../models/models.dart';
+
+import '../../../pages/pages.dart';
+import '../../../stores/stores.dart';
 
 import '../../components/drawer/page_tile.dart';
-import '../../../stores/page_store.dart';
 
 class PageSection extends StatelessWidget {
   final PageStore pageStore = GetIt.I<PageStore>();
@@ -34,38 +34,43 @@ class PageSection extends StatelessWidget {
               verifyLogin(0);
             },
             highlighted: pageStore.page == 0),
+        if (authStore.userAuth?.type == UserType.ADMIN ||
+            authStore.userAuth?.type == UserType.ESCOLA)
+          PageTile(
+              label: 'Matrículas',
+              iconData: Icons.edit_document,
+              onTap: () {
+                verifyLogin(1);
+              },
+              highlighted: pageStore.page == 1),
+        if (authStore.userAuth?.type == UserType.ADMIN ||
+            authStore.userAuth?.type == UserType.ESCOLA)
+          PageTile(
+              label: 'Usuários',
+              iconData: Icons.supervised_user_circle_sharp,
+              onTap: () {
+                verifyLogin(2);
+              },
+              highlighted: pageStore.page == 2),
         PageTile(
-            label: 'Matrículas',
-            iconData: Icons.child_care,
-            onTap: () {
-              verifyLogin(1);
-            },
-            highlighted: pageStore.page == 1),
-        PageTile(
-            label: 'Usuários',
-            iconData: Icons.supervised_user_circle_sharp,
-            onTap: () {
-              verifyLogin(2);
-              ;
-            },
-            highlighted: pageStore.page == 2),
-        PageTile(
-            label: 'Fila',
-            iconData: Icons.linear_scale_sharp,
+            label: 'Buscar Criança',
+            iconData: Icons.child_care_sharp,
             onTap: () {
               verifyLogin(3);
             },
             highlighted: pageStore.page == 3),
-        PageTile(
-            label: 'Fila2',
-            iconData: Icons.linear_scale_sharp,
-            onTap: () {
-              pageStore.setPage(4);
-            },
-            highlighted: pageStore.page == 4),
+        if (authStore.userAuth?.type == UserType.ADMIN ||
+            authStore.userAuth?.type == UserType.ESCOLA)
+          PageTile(
+              label: 'Posição na Fila',
+              iconData: Icons.car_crash,
+              onTap: () {
+                pageStore.setPage(4);
+              },
+              highlighted: pageStore.page == 4),
         PageTile(
             label: 'Minha Conta',
-            iconData: Icons.linear_scale_sharp,
+            iconData: Icons.person,
             onTap: () {
               verifyLogin(5);
             },

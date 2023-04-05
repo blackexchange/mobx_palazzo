@@ -11,17 +11,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeParse();
   setupLocators();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 void setupLocators() {
-  GetIt.I.registerSingleton(PageStore());
   GetIt.I.registerSingleton(AuthStore());
-  GetIt.I.registerSingleton(HomeStore());
-  GetIt.I.registerSingleton(TurmaStore());
-  GetIt.I.registerSingleton(MatriculaStore());
   GetIt.I.registerSingleton(UserStore());
-  //GetIt.I.registerSingleton(FilaStore());
+  GetIt.I.registerSingleton(PageStore());
+  GetIt.I.registerSingleton(HomeStore());
+  GetIt.I.registerSingleton(FilaStore());
+  // GetIt.I.registerSingleton(TurmaStore());
+  GetIt.I.registerSingleton(MatriculaStore());
   //GetIt.I.registerSingleton(MyFilaStore());
 }
 
@@ -38,7 +38,7 @@ Future<void> initializeParse() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+//  final AuthStore authStore = GetIt.I<AuthStore>();
 
   // This widget is the root of your application.
   @override
@@ -59,23 +59,22 @@ class MyApp extends StatelessWidget {
       },
     );
     return MaterialApp(
-      title: 'Escolar',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: primaryColorShades,
-          primaryColor: Colors.blueGrey,
-          primaryColorLight: Colors.redAccent,
-          primaryColorDark: Colors.redAccent.shade700,
-          scaffoldBackgroundColor: Colors.blueGrey.shade200,
-          appBarTheme: AppBarTheme(elevation: 0),
-          visualDensity: VisualDensity.adaptivePlatformDensity),
-      supportedLocales: const [Locale('pt', 'BR')],
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
-      ],
-      home: BasePage(),
-    );
+        title: 'Escolar',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primarySwatch: primaryColorShades,
+            primaryColor: Colors.blueGrey,
+            primaryColorLight: Colors.redAccent,
+            primaryColorDark: Colors.redAccent.shade700,
+            scaffoldBackgroundColor: Colors.blueGrey.shade200,
+            appBarTheme: AppBarTheme(elevation: 0),
+            visualDensity: VisualDensity.adaptivePlatformDensity),
+        supportedLocales: const [Locale('pt', 'BR')],
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate
+        ],
+        home: BasePage());
   }
 }

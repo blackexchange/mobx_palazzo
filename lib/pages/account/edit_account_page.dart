@@ -30,7 +30,7 @@ class EditAccountPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                IgnorePointer(
+                /* IgnorePointer(
                   ignoring: accountStore.loading,
                   child: LayoutBuilder(builder: (_, constraint) {
                     return ToggleSwitch(
@@ -44,7 +44,7 @@ class EditAccountPage extends StatelessWidget {
                         initialLabelIndex: accountStore.userType?.index,
                         onToggle: accountStore.setUserType);
                   }),
-                ),
+                ),*/
                 SizedBox(
                   height: 16,
                 ),

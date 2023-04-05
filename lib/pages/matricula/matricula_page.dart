@@ -34,7 +34,7 @@ class _MatriculaPageState extends State<MatriculaPage> {
     const cPadding = EdgeInsets.fromLTRB(16, 8, 12, 8);
 
     return Scaffold(
-      drawer: CustomDrawer(),
+      //  drawer: CustomDrawer(),
       appBar: AppBar(
         title: Text('Matrícula'),
         centerTitle: true,

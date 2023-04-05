@@ -7,3 +7,4 @@ export './turma/turma.dart';
 export './user/user.dart';
 export './fila/fila.dart';
 export 'account/account.dart';
+export './matricula_list/matriula_list.dart';

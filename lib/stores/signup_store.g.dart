@@ -9,6 +9,13 @@ part of 'signup_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$SignUpStore on _SignUpStore, Store {
+  Computed<bool>? _$escolaValidComputed;
+
+  @override
+  bool get escolaValid =>
+      (_$escolaValidComputed ??= Computed<bool>(() => super.escolaValid,
+              name: '_SignUpStore.escolaValid'))
+          .value;
   Computed<bool>? _$nameValidComputed;
 
   @override
@@ -71,6 +78,21 @@ mixin _$SignUpStore on _SignUpStore, Store {
   set error(String? value) {
     _$errorAtom.reportWrite(value, super.error, () {
       super.error = value;
+    });
+  }
+
+  late final _$escolaAtom = Atom(name: '_SignUpStore.escola', context: context);
+
+  @override
+  Escola? get escola {
+    _$escolaAtom.reportRead();
+    return super.escola;
+  }
+
+  @override
+  set escola(Escola? value) {
+    _$escolaAtom.reportWrite(value, super.escola, () {
+      super.escola = value;
     });
   }
 
@@ -175,6 +197,17 @@ mixin _$SignUpStore on _SignUpStore, Store {
   }
 
   @override
+  void setEscola(Escola value) {
+    final _$actionInfo = _$_SignUpStoreActionController.startAction(
+        name: '_SignUpStore.setEscola');
+    try {
+      return super.setEscola(value);
+    } finally {
+      _$_SignUpStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic setEmail(String value) {
     final _$actionInfo = _$_SignUpStoreActionController.startAction(
         name: '_SignUpStore.setEmail');
@@ -223,11 +256,13 @@ mixin _$SignUpStore on _SignUpStore, Store {
     return '''
 name: ${name},
 error: ${error},
+escola: ${escola},
 email: ${email},
 senha: ${senha},
 confirmaSenha: ${confirmaSenha},
 telefone: ${telefone},
 isLoading: ${isLoading},
+escolaValid: ${escolaValid},
 nameValid: ${nameValid},
 emailValid: ${emailValid},
 senhaValid: ${senhaValid},

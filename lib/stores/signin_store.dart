@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import '../helpers/helpers.dart';
+import '../models/escola.dart';
 import '../repositories/repositories.dart';
 import './auth_store.dart';
 

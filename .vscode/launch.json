@@ -6,7 +6,7 @@
     "configurations": [
 
         {
-            "name": "mobx_palazzo",
+            "name": "escolaflow",
             "request": "launch",
             "type": "dart"
         },

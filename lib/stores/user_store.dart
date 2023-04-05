@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:mobx_palazzo/models/models.dart';
+import '../../models/models.dart';
 import '../helpers/helpers.dart';
 import '../repositories/repositories.dart';
 

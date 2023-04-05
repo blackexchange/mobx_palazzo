@@ -12,11 +12,15 @@ class UserRepo {
     parseObj.set<String>('phone', user.phone!);
     parseObj.set('type', user.type.index);
 
+    parseObj.set<ParseObject>(
+        'escola', ParseObject('Escola')..set('objectId', user.escola?.id));
+
     final response = await parseObj.signUp();
 
     if (response.success) {
       ParseUser pUser = response.result;
-      final User userParsed = User.fromJson(pUser.objectId!, pUser.toJson());
+      final User userParsed =
+          User.fromJson(pUser.objectId!, pUser.toJson(), obj: parseObj);
 
       return userParsed;
     } else {
@@ -72,6 +76,8 @@ class UserRepo {
       return null;
     } else {
       ParseUser p = response.result;
+
+      //atualizarMatriculas(p.);
 
       QueryBuilder<ParseUser> queryUsers =
           QueryBuilder<ParseUser>(ParseUser.forQuery());

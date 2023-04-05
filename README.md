@@ -1,4 +1,4 @@
-# mobx_palazzo
+# escolaflow
 
 A new Flutter project.
 

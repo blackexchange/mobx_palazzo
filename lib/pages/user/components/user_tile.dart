@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mobx_palazzo/pages/user/user_matricula.dart';
+import '../../../pages/user/user_matricula.dart';
 import '../../../models/models.dart';
 
 class UserTile extends StatelessWidget {

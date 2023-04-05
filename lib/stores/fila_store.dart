@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx_palazzo/models/models.dart';
+import '../../models/models.dart';
 import '../helpers/helpers.dart';
 import '../repositories/repositories.dart';
 import 'package:geolocator/geolocator.dart';
@@ -15,7 +15,7 @@ class FilaStore = _FilaStore with _$FilaStore;
 abstract class _FilaStore with Store {
   _FilaStore() {
     autorun((_) async {
-      getLocation();
+      /*   getLocation();
 
       try {
         setLoading(true);
@@ -28,6 +28,7 @@ abstract class _FilaStore with Store {
       } catch (e) {
         setError(e.toString());
       }
+      */
     });
   }
 
@@ -61,6 +62,9 @@ abstract class _FilaStore with Store {
 
   @observable
   LatLng? destination;
+
+  @observable
+  int? posicaoNaFila;
 
   @action
   setDistance(double value) => distance = value;
@@ -127,14 +131,22 @@ abstract class _FilaStore with Store {
 
   Future<void> getLocation() async {
     setLoading(true);
+    await atualizarFila();
 
     try {
       Position position = await determinePosition();
-      final LatLng destination = LatLng(-12.967748, -38.49356322);
 
+      final LatLng destination =
+          matriculaSelecionada!.turma!.escola!.localizacao!;
+      final distanciaMinima =
+          matriculaSelecionada!.turma!.escola!.distanciaFila!;
+
+      //  final LatLng destination = LatLng(-12.967748, -38.50356022);
+//(-12.97073, -38.49089)
       setCurrentLocation(LatLng(position.latitude, position.longitude));
+      //setCurrentLocation(LatLng(-12.967748, -38.50356322));
       setDistance(_calculateDistance(currentLocation!, destination));
-      if (distance <= 100) {
+      if (distance <= distanciaMinima) {
         setDistante(false);
       } else {
         setDistante(true);
@@ -162,9 +174,69 @@ abstract class _FilaStore with Store {
     try {
       await f.save(fila);
       // matriculaSaved = true;
+      matriculaSelecionada!.posicaoNaFila =
+          getPosicaoNaFila(matriculaSelecionada!.id!);
+
+      matriculaSelecionada!.filaStatus =
+          getStatusNaFila(matriculaSelecionada!.id!);
+      setLoading(false);
+    } catch (e) {
+      error = e.toString();
+    }
+  }
+
+  Future<void> sairDaFila() async {
+    setLoading(true);
+
+    final fila = filaList.firstWhere(
+        (element) => element.matricula?.id == matriculaSelecionada?.id);
+
+    FilaRepo f = FilaRepo();
+
+    try {
+      await f.update(fila.id!);
+      // matriculaSaved = true;
+      matriculaSelecionada?.filaStatus = null;
+      matriculaSelecionada?.posicaoNaFila = null;
     } catch (e) {
       error = e.toString();
     }
     setLoading(false);
+  }
+
+  String getPosicaoNaFila(String matriculaId) {
+    final pos =
+        filaList.indexWhere((element) => element.matricula?.id == matriculaId);
+    if (pos + 1 == 1) {
+      return 'Você é o próximo da fila';
+    } else {
+      return 'Você é o ${pos + 1}° da fila';
+    }
+  }
+
+  FilaStatus? getStatusNaFila(String matriculaId) {
+    return filaList
+        .firstWhere((element) => element.matricula?.id == matriculaId)
+        .status;
+  }
+
+  Future<void> atualizarFila() async {
+    try {
+      // setLoading(true);
+
+      final users = await FilaRepo().getFila();
+      filaList.clear();
+      filaList.addAll(users!);
+      matriculaSelecionada!.posicaoNaFila =
+          getPosicaoNaFila(matriculaSelecionada!.id!);
+
+      matriculaSelecionada!.filaStatus =
+          getStatusNaFila(matriculaSelecionada!.id!);
+
+      setError(null);
+      //  setLoading(false);
+    } catch (e) {
+      setError(e.toString());
+    }
   }
 }

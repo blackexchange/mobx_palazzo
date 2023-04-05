@@ -9,13 +9,11 @@ import '../components/components.dart';
 //import './components/components.dart';
 
 class MyMatriculaPage extends StatelessWidget {
-  final UserStore userStore = GetIt.I<UserStore>();
+  final AuthStore authStore = GetIt.I<AuthStore>();
 
   //final List<Matricula> matriculas;
 
-  final User u;
-
-  MyMatriculaPage(this.u);
+  MyMatriculaPage();
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +23,18 @@ class MyMatriculaPage extends StatelessWidget {
               actions: [
                 IconButton(
                     onPressed: () async {
-                      await userStore.atualizaMatriculaUsuario(u);
+                      await authStore.atualizaMatriculaUsuario();
                     },
-                    icon: Icon(Icons.add))
+                    icon: Icon(Icons.refresh))
               ],
             ),
             body: ListView.builder(
-                itemCount: u.matriculas!.length,
+                itemCount: authStore.userAuth?.matriculas!.length,
                 itemBuilder: (_, i) {
-                  final a = u.matriculas![i];
+                  final a = authStore.userAuth?.matriculas![i];
                   return Card(
                     child: ListTile(
-                      title: Text(a.nome!),
+                      title: Text(a!.nome!),
                       subtitle: Text(a.turma!.title),
                       trailing: a.status == MatriculaStatus.ATIVO
                           ? Icon(

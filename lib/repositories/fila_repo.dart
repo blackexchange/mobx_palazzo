@@ -9,6 +9,8 @@ class FilaRepo {
     q.includeObject(
         ['responsavel', 'matricula.turma.escola', 'matricula.owner']);
 
+    q.whereNotEqualTo('status', FilaStatus.SAIUDAFILA.index);
+    q.orderByAscending('createdAt');
     final apiResponse = await q.query();
 
     if (apiResponse.success && apiResponse.results != null) {
@@ -39,9 +41,25 @@ class FilaRepo {
       filaObj.set<String?>('aluno', f.matricula?.nome);
       // filaObj.set<String?>('aluno', f.matricula?.nome);
       filaObj.set<ParseUser?>('responsavel', currentUser);
-      filaObj.set<int>('status', f.status!.index);
+      filaObj.set<int>('status', FilaStatus.NAFILA.index);
 
       final response = await filaObj.save();
+
+      if (!response.success) {
+        return Future.error(ParseErrors.getDescription(response.error!.code));
+      }
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future update(String id) async {
+    try {
+      final filaObj = ParseObject('Fila');
+      filaObj.objectId = id;
+      filaObj.set<int>('status', FilaStatus.SAIUDAFILA.index);
+
+      final response = await filaObj.update();
 
       if (!response.success) {
         return Future.error(ParseErrors.getDescription(response.error!.code));

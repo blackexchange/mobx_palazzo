@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mobx_palazzo">
+    package="com.example.escolaflow">
    <application
-        android:label="mobx_palazzo"
+        android:label="escolaflow"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
                 <meta-data android:name="com.google.android.geo.API_KEY"

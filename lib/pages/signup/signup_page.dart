@@ -1,8 +1,9 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:escolaflow/pages/signup/components/escola_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx_palazzo/pages/components/components.dart';
+import '../../pages/components/components.dart';
 import '../../stores/stores.dart';
 import '../../pages/login/login.dart';
 
@@ -33,6 +34,7 @@ class SignUpPage extends StatelessWidget {
                         return ErrorBox(signUpStore.error);
                       },
                     ),
+                    EscolaField(signUpStore),
                     SizedBox(
                       height: 16,
                     ),

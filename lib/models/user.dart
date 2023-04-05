@@ -1,6 +1,7 @@
-import 'package:mobx_palazzo/models/models.dart';
+import '../models/models.dart';
 
-enum UserType { ADMIN, MORADOR, PROPRIETARIO, FUNCIONARIO, SUPER, ADMUNIDADE }
+enum UserType { ADMIN, ESCOLA, FUNCIONARIO, RESPONSAVEL }
+//enum UserType { ADMIN, MORADOR, PROPRIETARIO, FUNCIONARIO, SUPER, ADMUNIDADE }
 
 class User {
   String? id;
@@ -11,6 +12,7 @@ class User {
   UserType type;
   String? createdAt;
   List<Matricula>? matriculas;
+  Escola? escola;
 
   User(
       {this.id,
@@ -20,6 +22,7 @@ class User {
       this.senha,
       required this.type,
       this.matriculas,
+      this.escola,
       this.createdAt});
 
   factory User.fromJson(String key, Map json, {dynamic obj}) {
@@ -44,6 +47,7 @@ class User {
       email: json['username'],
       type: UserType.values[json['type']],
       phone: json['phone'],
+      escola: Escola(id: json['escola']['objectId']),
       matriculas: listMat,
     );
     // type: UserType.values[json['type']],
@@ -55,7 +59,7 @@ class User {
         'name': name,
         'email': email,
         'phone': phone,
-        'type': type?.index,
+        'type': type.index,
         'createdAt': createdAt
       };
 }

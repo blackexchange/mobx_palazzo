@@ -12,7 +12,7 @@ class TurmaPageList extends StatelessWidget {
 
   TurmaPageList({this.showAll = true, this.turmaSelected});
 
-  final TurmaStore turmaStore = GetIt.I<TurmaStore>();
+  final TurmaStore turmaStore = TurmaStore();
 
   @override
   Widget build(BuildContext context) {
@@ -52,15 +52,29 @@ class TurmaPageList extends StatelessWidget {
                       alignment: Alignment.center,
                       height: 50,
                       color: turma.id == turmaSelected?.id
-                          ? Colors.blueAccent.withAlpha(50)
+                          ? Theme.of(context).primaryColorLight.withAlpha(60)
                           : null,
-                      child: Text(
-                        turma.title,
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: turma.id == turmaSelected?.id
-                                ? FontWeight.bold
-                                : null),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            turma.title,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: turma.id == turmaSelected?.id
+                                    ? FontWeight.bold
+                                    : null),
+                          ),
+                          Text(
+                            turma.desc,
+                            style: TextStyle(
+                                color: Colors.grey,
+                                fontWeight: turma.id == turmaSelected?.id
+                                    ? FontWeight.bold
+                                    : null),
+                          ),
+                        ],
                       ),
                     ),
                   );

@@ -16,6 +16,8 @@ class Matricula {
   String? createdAt;
   int? buscas;
   List<User>? responsaveis;
+  String? posicaoNaFila;
+  FilaStatus? filaStatus;
 
   Matricula(
       {this.id,

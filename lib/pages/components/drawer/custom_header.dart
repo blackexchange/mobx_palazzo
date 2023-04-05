@@ -47,7 +47,7 @@ class CustomHeader extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  auth.isAuth ? auth.userAuth!.name! : 'Clique aqui!',
+                  auth.isAuth ? auth.userAuth!.email! : 'Clique aqui!',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,

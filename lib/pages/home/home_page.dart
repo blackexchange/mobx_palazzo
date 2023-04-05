@@ -56,79 +56,81 @@ class HomePage extends StatelessWidget {
             })
           ],
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(child: Observer(builder: (_) {
-              if (homeStore.error != null) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Icon(
-                        Icons.error,
-                        size: 100,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        '',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white),
-                        textAlign: TextAlign.center,
-                      )
-                    ],
-                  ),
-                );
-              }
-              if (homeStore.loading) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(Colors.white),
-                  ),
-                );
-              }
-              if (homeStore.matriculaList.isEmpty) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Icon(
-                        Icons.border_clear,
-                        size: 100,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Humm... Não há registros!',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white),
-                        textAlign: TextAlign.center,
-                      )
-                    ],
-                  ),
-                );
-              }
-              return ListView.builder(
-                  itemCount: homeStore.matriculaList.length,
-                  itemBuilder: (_, i) {
-                    return MatriculaTile(homeStore.matriculaList[i]);
-                  });
-            })),
-          ],
-        ),
+        body: 2 == 2
+            ? Container()
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(child: Observer(builder: (_) {
+                    if (homeStore.error != null) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Icon(
+                              Icons.error,
+                              size: 100,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              '',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white),
+                              textAlign: TextAlign.center,
+                            )
+                          ],
+                        ),
+                      );
+                    }
+                    if (homeStore.loading) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        ),
+                      );
+                    }
+                    if (homeStore.matriculaList.isEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Icon(
+                              Icons.border_clear,
+                              size: 100,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              'Humm... Não há registros!',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white),
+                              textAlign: TextAlign.center,
+                            )
+                          ],
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                        itemCount: homeStore.matriculaList.length,
+                        itemBuilder: (_, i) {
+                          return MatriculaTile(homeStore.matriculaList[i]);
+                        });
+                  })),
+                ],
+              ),
       ),
     );
   }

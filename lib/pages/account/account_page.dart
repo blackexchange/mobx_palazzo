@@ -6,8 +6,6 @@ import '../../pages/components/components.dart';
 import '../../stores/auth_store.dart';
 
 class AccountPage extends StatelessWidget {
-  const AccountPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +70,7 @@ class AccountPage extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => Container()));
+                    .push(MaterialPageRoute(builder: (_) => MyMatriculaPage()));
               },
             ),
             ListTile(

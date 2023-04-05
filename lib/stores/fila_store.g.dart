@@ -135,6 +135,22 @@ mixin _$FilaStore on _FilaStore, Store {
     });
   }
 
+  late final _$posicaoNaFilaAtom =
+      Atom(name: '_FilaStore.posicaoNaFila', context: context);
+
+  @override
+  int? get posicaoNaFila {
+    _$posicaoNaFilaAtom.reportRead();
+    return super.posicaoNaFila;
+  }
+
+  @override
+  set posicaoNaFila(int? value) {
+    _$posicaoNaFilaAtom.reportWrite(value, super.posicaoNaFila, () {
+      super.posicaoNaFila = value;
+    });
+  }
+
   late final _$determinePositionAsyncAction =
       AsyncAction('_FilaStore.determinePosition', context: context);
 
@@ -244,7 +260,8 @@ loading: ${loading},
 distante: ${distante},
 distance: ${distance},
 currentLocation: ${currentLocation},
-destination: ${destination}
+destination: ${destination},
+posicaoNaFila: ${posicaoNaFila}
     ''';
   }
 }

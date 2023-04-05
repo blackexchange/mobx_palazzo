@@ -1,6 +1,6 @@
+import 'package:escolaflow/models/models.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx_palazzo/models/user.dart';
 import '../helpers/helpers.dart';
 import '../repositories/repositories.dart';
 
@@ -15,6 +15,14 @@ abstract class _AuthStore with Store {
   _AuthStore() {
     _getCurrentUser();
   }
+
+  ObservableList<Matricula?> myMatriculaList = ObservableList<Matricula>();
+
+  @observable
+  bool isLoading = false;
+
+  @observable
+  String? error;
 
   @action
   setUser(User? value) => userAuth = value;
@@ -33,5 +41,18 @@ abstract class _AuthStore with Store {
     await UserRepo().logout();
 
     setUser(null);
+  }
+
+  @action
+  Future<void> atualizaMatriculaUsuario() async {
+    isLoading = true;
+
+    UserRepo m = UserRepo();
+    try {
+      await m.atualizarMatriculas(userAuth!);
+    } catch (e) {
+      error = e.toString();
+    }
+    isLoading = false;
   }
 }

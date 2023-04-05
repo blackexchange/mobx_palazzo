@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx_palazzo/pages/components/components.dart';
+import '../../pages/components/components.dart';
 import '../../stores/stores.dart';
 
 import '../signup/signup.dart';

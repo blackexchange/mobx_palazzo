@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx_palazzo/models/models.dart';
-import 'package:mobx_palazzo/stores/stores.dart';
+import '../models/models.dart';
+import '../stores/stores.dart';
 import '../helpers/helpers.dart';
 import '../repositories/repositories.dart';
 import 'package:geolocator/geolocator.dart';

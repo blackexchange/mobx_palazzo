@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx_palazzo/models/user.dart';
+import '../models/escola.dart';
+import '../models/user.dart';
 import '../helpers/helpers.dart';
 import '../repositories/repositories.dart';
 import 'auth_store.dart';
@@ -18,6 +19,17 @@ abstract class _SignUpStore with Store {
 
   @action
   void setName(String value) => name = value;
+
+  @observable
+  Escola? escola;
+
+  @action
+  void setEscola(Escola value) => escola = value;
+
+  @computed
+  bool get escolaValid => escola != null;
+
+  String? get escolaError => escolaValid ? null : 'Escola inválida';
 
   @computed
   bool get nameValid => name != null && name!.length > 4;
@@ -113,6 +125,7 @@ abstract class _SignUpStore with Store {
       telefoneValid &&
       senhaValid &&
       confirmaSenhaValid &&
+      escolaValid &&
       emailValid;
 
   void Function()? get signUpPressed =>
@@ -130,7 +143,8 @@ abstract class _SignUpStore with Store {
         email: email!,
         phone: telefone!,
         senha: senha!,
-        type: UserType.ADMIN);
+        escola: escola,
+        type: UserType.RESPONSAVEL);
 
     try {
       final userRet = await UserRepo().signUp(user);

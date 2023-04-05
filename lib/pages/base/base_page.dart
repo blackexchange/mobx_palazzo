@@ -28,7 +28,7 @@ class _BasePageState extends State<BasePage> {
         physics: NeverScrollableScrollPhysics(),
         children: [
           HomePage(),
-          MatriculaPage(),
+          MatriculaListPage(),
           UserPage(),
           FilaPage(),
           Container(),

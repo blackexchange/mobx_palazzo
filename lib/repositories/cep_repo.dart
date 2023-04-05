@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:mobx_palazzo/repositories/ibge_repo.dart';
+import '../repositories/ibge_repo.dart';
 
 import '../models/models.dart';
 

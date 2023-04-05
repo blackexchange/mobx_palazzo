@@ -4,9 +4,14 @@ import '../helpers/helpers.dart';
 import '../models/models.dart';
 
 class TurmaRepo {
-  Future<List<Turma>> getList() async {
-    final queryBuilder = QueryBuilder(ParseObject('Turmas'))
-      ..orderByAscending('title');
+  Future<List<Turma>> getList(String escolaId) async {
+    final queryBuilder = QueryBuilder<ParseObject>(ParseObject('Turmas'));
+    final t = ParseObject('Escola');
+    t.objectId = escolaId;
+
+    queryBuilder.whereEqualTo("escola", t.toPointer());
+    queryBuilder..orderByAscending('title');
+    queryBuilder.includeObject(['escola']);
     /*
       function userHasRole(user, roleName) {
     var query = new Parse.Query(Parse.Role);
@@ -20,7 +25,7 @@ class TurmaRepo {
 
     if (response.success) {
       final List<Turma> parsed = response.results!
-          .map((e) => Turma.fromJson(e.objectId!, e.toJson()))
+          .map((e) => Turma.fromJson(e.objectId!, e.toJson(), e: e))
           .toList();
 
       return parsed;
